@@ -1,0 +1,13 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/devops-lab/nginx-demo:$SHORT_SHA'
+      - '.'
+
+images:
+  - 'asia-south1-docker.pkg.dev/$PROJECT_ID/devops-lab/nginx-demo:$SHORT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
