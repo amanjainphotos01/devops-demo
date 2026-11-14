@@ -1,5 +1,10 @@
 steps:
-  # Step 1: Build Docker image
+  # Step 1: Run automated tests
+  - name: 'alpine:3.20'
+    entrypoint: 'sh'
+    args: ['test.sh']
+
+  # Step 2: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
@@ -7,13 +12,13 @@ steps:
       - 'asia-south1-docker.pkg.dev/$PROJECT_ID/devops-lab/nginx-demo:$SHORT_SHA'
       - '.'
 
-  # Step 2: Push image to Artifact Registry
+  # Step 3: Push Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
       - 'asia-south1-docker.pkg.dev/$PROJECT_ID/devops-lab/nginx-demo:$SHORT_SHA'
 
-  # Step 3: Deploy to Cloud Run
+  # Step 4: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
     entrypoint: 'gcloud'
     args:
