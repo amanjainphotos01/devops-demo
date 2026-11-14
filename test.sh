@@ -7,6 +7,6 @@ test -f index.html
 
 grep -q "CI/CD Deployment Successful!" index.html
 
-grep -q "Version: v2" index.html
+grep -q "Version: v999" index.html
 
 echo "All tests passed!"
